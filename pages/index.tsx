@@ -1,17 +1,31 @@
 import React from 'react';
-import TodoInput from '../components/TodoInput'; // TodoInputをインポート
+import Head from "next/head";
+import { TodoInput } from '../components/TodoInput';
 
-const Home: React.FC = () => {
-  const addTask = (task: string) => {
-    console.log('新しいタスク:', task); // タスクが渡されたかコンソールで確認
-  };
+export default function Home() {
+  // タスク追加関数
+  function addTask(task: string): void {
+    console.log('新しいタスク:', task); // 子コンポーネントから渡されたデータを処理
+  }
 
   return (
-    <div>
-      <h1>Todoリスト</h1>
-      <TodoInput onAddTask={addTask} />
-    </div>
+    <>
+      {/* HeadコンポーネントでSEO対応 */}
+      <Head>
+        <title>Todoリスト</title>
+        <meta name="description" content="タスク管理を効率化するTodoリストアプリです。" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </Head>
+
+      {/* メインコンテンツ */}
+      <main className="todo-app">
+        <header className="todo-header">
+          <h1 className="todo-title">Todoリスト</h1>
+        </header>
+        <section className="todo-input">
+          <TodoInput onAddTask={addTask} /> {/* 子コンポーネントに関数を渡す */}
+        </section>
+      </main>
+    </>
   );
 };
-
-export default Home;
