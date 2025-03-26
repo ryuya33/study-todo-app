@@ -1,6 +1,7 @@
 import React from 'react';
 import Head from "next/head";
 import { TodoInput } from '../components/TodoInput';
+import styles from '../styles/Home.module.css';
 
 export default function Home() {
   // タスク追加関数
@@ -18,11 +19,11 @@ export default function Home() {
       </Head>
 
       {/* メインコンテンツ */}
-      <main className="todo-app">
-        <header className="todo-header">
-          <h1 className="todo-title">Todoリスト</h1>
+      <main className={styles.todoApp}>
+        <header className={styles.todoHeader}>
+          <h1 className={styles.todoTitle}>Todoリスト</h1>
         </header>
-        <section className="todo-input">
+        <section className={styles.todoInput}>
           <TodoInput onAddTask={addTask} /> {/* 子コンポーネントに関数を渡す */}
         </section>
       </main>
