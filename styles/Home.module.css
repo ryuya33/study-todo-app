@@ -1,7 +1,7 @@
 /* Home.module.css */
 
 /* 全体のスタイル */
-.todo-app {
+.todoApp {
   font-family: Arial, sans-serif;
   padding: 20px;
   max-width: 600px;
@@ -13,12 +13,12 @@
 }
 
 /* ヘッダー部分 */
-.todo-header {
+.todoHeader {
   text-align: center;
   margin-bottom: 20px;
 }
 
-.todo-title {
+.todoTitle {
   font-size: 28px;
   font-weight: bold;
   color: #4CAF50;
@@ -26,22 +26,38 @@
 }
 
 /* セクション部分 */
-.todo-input {
+.todoInput {
   margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
 
-.todo-input input {
+.todoInput input {
   max-width: 100%;
   box-sizing: border-box;
 }
 
+.todoInput button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.todoInput button:hover {
+  background-color: #45a049;
+}
+
 @media (max-width: 768px) {
-  .todo-app {
+  .todoApp {
     padding: 10px;
     width: 90%;
   }
 
-  .todo-title {
+  .todoTitle {
     font-size: 24px;
   }
 }
