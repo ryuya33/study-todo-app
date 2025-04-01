@@ -1,5 +1,6 @@
 import React from 'react';
 import Head from "next/head";
+import Link from "next/link";
 import { TodoInput } from '../components/TodoInput';
 import styles from '../styles/Home.module.css';
 
@@ -26,6 +27,10 @@ export default function Home() {
         <section className={styles.todoInput}>
           <TodoInput onAddTask={addTask} /> {/* 子コンポーネントに関数を渡す */}
         </section>
+
+        <Link href="/tasks">
+          <button className={styles.taskListButton}>タスク一覧を見る</button>
+        </Link>
       </main>
     </>
   );
