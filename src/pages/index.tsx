@@ -4,6 +4,7 @@ import Link from "next/link";
 import { TodoInput } from '@/src/components/TodoInput';
 import styles from '@/src/styles/Home.module.css';
 import { Header } from '@/src/components/Header';
+
 export default function Home() {
   // タスク追加関数
   function addTask(task: string): void {
