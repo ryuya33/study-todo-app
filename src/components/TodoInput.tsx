@@ -1,19 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 
 type Props = {
-    onAddTask: (task: string) => void; // 入力されたタスクを処理するために、親コンポーネントに渡される関数
+    handleAddTask: (task: string) => void;
 };
 
-export function TodoInput({ onAddTask }: Props) {
+export function TodoInput({ handleAddTask }: Props) {
     const [inputValue, setInputValue] = useState('');
 
-    function handleSubmit(e: React.FormEvent) {
+    const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.value.length > 20) {
+            alert('20文字以内で入力してください');
+            return;
+        }
+        setInputValue(e.target.value.trim());
+    }, []);
+
+    const handleSubmit = useCallback((e: React.FormEvent) => {
         e.preventDefault();
         if (inputValue.trim()) {
-            onAddTask(inputValue); // 親コンポーネントの関数を呼び出す
+            handleAddTask(inputValue);
             setInputValue('');
         }
-    };
+        console.log(inputValue);
+    }, [inputValue, handleAddTask]);
 
     return (
         <div>
@@ -21,11 +30,11 @@ export function TodoInput({ onAddTask }: Props) {
                 <input
                     type="text"
                     value={inputValue}
-                    onChange={(e) => setInputValue(e.target.value)}
+                    onChange={handleChange}
                     placeholder="タスクを入力してください"
                 />
                 <button type="submit">追加</button>
             </form>
         </div>
     );
-};
+}

@@ -4,19 +4,17 @@ import Link from "next/link";
 import { TodoInput } from '@/src/components/TodoInput';
 import styles from '@/src/styles/Home.module.css';
 import { Header } from '@/src/components/Header';
+import { useTasks } from '@/src/hooks/useTasks';
 
 export default function Home() {
-  // タスク追加関数
-  function addTask(task: string): void {
-    console.log('新しいタスク:', task); // 子コンポーネントから渡されたデータを処理
-  }
+  const { handleAddTask } = useTasks();
 
   return (
     <>
       {/* HeadコンポーネントでSEO対応 */}
       <Head>
-        <title>Todoリスト</title>
-        <meta name="description" content="タスク管理を効率化するTodoリストアプリです。" />
+        <title>タスク登録</title>
+        <meta name="description" content="タスク登録ページです。" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
@@ -25,7 +23,8 @@ export default function Home() {
       {/* メインコンテンツ */}
       <main className={styles.todoApp}>
         <section className={styles.todoInput}>
-          <TodoInput onAddTask={addTask} /> {/* 子コンポーネントに関数を渡す */}
+          <h2>タスク登録</h2>
+          <TodoInput handleAddTask={handleAddTask} />
         </section>
 
         <Link href="/tasks">

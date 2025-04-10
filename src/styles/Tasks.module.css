@@ -1,0 +1,101 @@
+/* タスクリスト全体のスタイル */
+.taskList {
+  margin: 20px 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* 個々のタスクアイテムのスタイル */
+.taskItem {
+  display: flex;
+  align-items: center;
+  padding: 12px 15px;
+  margin-bottom: 10px;
+  background-color: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.taskItem:hover {
+  background-color: #f1f3f5;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* タスクのテキスト部分 */
+.taskText {
+  flex-grow: 1;
+  margin: 0 15px;
+  font-size: 16px;
+  color: #333;
+}
+
+/* 完了したタスクのスタイル */
+.taskCompleted {
+  text-decoration: line-through;
+  color: #6c757d;
+}
+
+/* タスクのチェックボックス */
+.taskCheckbox {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+/* 削除ボタン */
+.deleteButton {
+  padding: 6px 12px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.deleteButton:hover {
+  background-color: #c82333;
+}
+
+/* タスクが空の場合のメッセージ */
+.emptyMessage {
+  text-align: center;
+  padding: 20px;
+  color: #6c757d;
+  font-style: italic;
+}
+
+/* タスク一括削除ボタン */
+.deleteAllButton {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.deleteAllButton:hover {
+  background-color: #5a6268;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+  .taskItem {
+    padding: 10px 12px;
+  }
+
+  .taskText {
+    font-size: 14px;
+  }
+
+  .deleteButton {
+    padding: 4px 8px;
+    font-size: 14px;
+  }
+}

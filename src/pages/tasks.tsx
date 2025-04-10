@@ -1,52 +1,52 @@
-import React, { useState, useCallback } from "react";
+import React from 'react';
+import Head from "next/head";
 import Link from "next/link";
+import styles from '@/src/styles/Home.module.css';
+import { Header } from '@/src/components/Header';
+import { useTasks } from '@/src/hooks/useTasks';
 
 export default function Tasks() {
-    const [tasks, setTasks] = useState([
-        { text: "タスク1", completed: false },
-        { text: "タスク2", completed: false },
-        { text: "タスク3", completed: false },
-    ]); // 仮のタスクのリスト（実際にはデータベースから取得する）
-
-    const handleDeleteTask = useCallback((index: number) => {
-        setTasks(prevTasks => prevTasks.filter((_, i) => i !== index));
-    }, []);
-
-    const handleToggleComplete = useCallback((index: number) => {
-        setTasks(prevTasks => {
-            const newTasks = [...prevTasks];
-            newTasks[index] = {
-                ...newTasks[index],
-                completed: !newTasks[index].completed
-            };
-            return newTasks;
-        });
-    }, []);
-
-    const handleDeleteAllTasks = useCallback(() => {
-        setTasks([]);
-    }, []);
+    const { tasks, handleDeleteTask, handleToggleComplete, handleDeleteAllTasks } = useTasks();
 
     return (
-        <main>
-            <h1>タスク一覧</h1>
-            <ul>
-                {tasks.map((task, index) => (
-                    <li key={index}
-                        style={{ textDecoration: task.completed ? "line-through" : "none" }}
-                    >
-                        <span onClick={() => handleToggleComplete(index)} style={{ cursor: 'pointer' }}>{task.text}</span>
-                        <button onClick={(e) => {
-                            e.stopPropagation();
-                            handleDeleteTask(index);
-                        }}>削除</button>
-                    </li>
-                ))}
-            </ul>
-            <button onClick={handleDeleteAllTasks}>全てのタスクを削除</button>
-            <Link href="/">
-                <button>タスクを追加する</button>
-            </Link>
-        </main>
+        <>
+            <Head>
+                <title>タスク一覧</title>
+                <meta name="description" content="タスク一覧ページです。" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            </Head>
+
+            <Header />
+
+            <main className={styles.todoApp}>
+                <section className={styles.todoList}>
+                    <h2>タスク一覧</h2>
+                    {tasks.length === 0 ? (
+                        <p>タスクがありません</p>
+                    ) : (
+                        <ul>
+                            {tasks.map((task, index) => (
+                                <li key={index} className={styles.todoItem}>
+                                    <input
+                                        type="checkbox"
+                                        checked={task.completed}
+                                        onChange={() => handleToggleComplete(index)}
+                                    />
+                                    <span className={task.completed ? styles.completed : ''}>
+                                        {task.text}
+                                    </span>
+                                    <button onClick={() => handleDeleteTask(index)}>削除</button>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                    <button onClick={handleDeleteAllTasks}>すべて削除</button>
+                </section>
+
+                <Link href="/">
+                    <button className={styles.taskListButton}>タスク登録に戻る</button>
+                </Link>
+            </main>
+        </>
     );
 }
