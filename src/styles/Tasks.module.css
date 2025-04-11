@@ -45,13 +45,7 @@
 
 /* 削除ボタン */
 .deleteButton {
-  padding: 6px 12px;
   background-color: #dc3545;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.2s ease;
 }
 
 .deleteButton:hover {
@@ -70,14 +64,8 @@
 .deleteAllButton {
   display: block;
   width: 100%;
-  padding: 10px;
   margin-top: 20px;
   background-color: #6c757d;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.3s ease;
 }
 
 .deleteAllButton:hover {

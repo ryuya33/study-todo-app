@@ -3,6 +3,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { TodoInput } from '@/src/components/TodoInput';
 import styles from '@/src/styles/Home.module.css';
+import commonStyles from '@/src/styles/common.module.css';
 import { Header } from '@/src/components/Header';
 import { useTasks } from '@/src/hooks/useTasks';
 
@@ -21,14 +22,14 @@ export default function Home() {
       <Header />
 
       {/* メインコンテンツ */}
-      <main className={styles.todoApp}>
-        <section className={styles.todoInput}>
+      <main className={commonStyles.appContainer}>
+        <section className={commonStyles.section}>
           <h2>タスク登録</h2>
           <TodoInput handleAddTask={handleAddTask} />
         </section>
 
         <Link href="/tasks">
-          <button className={styles.taskListButton}>タスク一覧を見る</button>
+          <button className={`${commonStyles.button} ${styles.taskListButton}`}>タスク一覧を見る</button>
         </Link>
       </main>
     </>

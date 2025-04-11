@@ -5,7 +5,7 @@ import styles from '@/src/components/Header/Header.module.css';
 export function Header() {
     return (
         <header className={styles.header}>
-            <h1 className={styles.title}>Todoリスト</h1>
+            <h1 className={styles.title}>タスク管理アプリ</h1>
             <nav>
                 <ul className={styles.navList}>
                     <li><Link href="/">ホーム</Link></li>

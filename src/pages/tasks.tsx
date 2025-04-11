@@ -1,7 +1,8 @@
 import React from 'react';
 import Head from "next/head";
 import Link from "next/link";
-import styles from '@/src/styles/Home.module.css';
+import styles from '@/src/styles/Tasks.module.css';
+import commonStyles from '@/src/styles/common.module.css';
 import { Header } from '@/src/components/Header';
 import { useTasks } from '@/src/hooks/useTasks';
 
@@ -18,33 +19,46 @@ export default function Tasks() {
 
             <Header />
 
-            <main className={styles.todoApp}>
-                <section className={styles.todoList}>
+            <main className={commonStyles.appContainer}>
+                <section className={commonStyles.section}>
                     <h2>タスク一覧</h2>
                     {tasks.length === 0 ? (
-                        <p>タスクがありません</p>
+                        <p className={styles.emptyMessage}>タスクがありません</p>
                     ) : (
-                        <ul>
+                        <ul className={styles.taskList}>
                             {tasks.map((task, index) => (
-                                <li key={index} className={styles.todoItem}>
+                                <li key={index} className={styles.taskItem}>
                                     <input
                                         type="checkbox"
+                                        className={styles.taskCheckbox}
                                         checked={task.completed}
                                         onChange={() => handleToggleComplete(index)}
                                     />
-                                    <span className={task.completed ? styles.completed : ''}>
+                                    <span className={`${styles.taskText} ${task.completed ? styles.taskCompleted : ''}`}>
                                         {task.text}
                                     </span>
-                                    <button onClick={() => handleDeleteTask(index)}>削除</button>
+                                    <button
+                                        className={`${commonStyles.button} ${styles.deleteButton}`}
+                                        onClick={() => handleDeleteTask(index)}
+                                    >
+                                        削除
+                                    </button>
                                 </li>
                             ))}
                         </ul>
                     )}
-                    <button onClick={handleDeleteAllTasks}>すべて削除</button>
+                    {tasks.length > 0 && (
+                        <button
+                            className={`${commonStyles.button} ${styles.deleteAllButton}`}
+                            onClick={handleDeleteAllTasks}
+                        >
+                            すべて削除
+                        </button>
+                    )}
                 </section>
 
                 <Link href="/">
-                    <button className={styles.taskListButton}>タスク登録に戻る</button>
+                    <button className={`${commonStyles.button} ${styles.taskListButton}`}>タスク登録に戻る</button>
                 </Link>
             </main>
         </>
