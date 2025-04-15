@@ -6,7 +6,7 @@ export type Task = {
     completed: boolean; // タスクの完了状態（true: 完了、false: 未完了）
 };
 
-// useTasksフックの戻り値の型を定義
+// useTasksフックの戻り値の型を定義（外部コンポーネントが利用するもの）
 export type UseTasksReturnType = {
     tasks: Task[];                                  // 現在のタスク一覧
     handleAddTask: (task: string) => void;          // タスク追加関数
@@ -24,7 +24,7 @@ export const useTasks = (): UseTasksReturnType => {
     // 初回レンダリング時に localStorage からタスクを読み込む
     useEffect(() => {
         try {
-            // localStorageからタスクリストを取得
+            // localStorage からタスクリストを取得
             const savedTasks = localStorage.getItem('tasks');
             if (savedTasks) {
                 // JSON文字列をパースして tasks にセット
@@ -34,16 +34,15 @@ export const useTasks = (): UseTasksReturnType => {
             console.error('localStorage のデータ取得に失敗しました:', error);
             setTasks([]);
         }
-        // 初期化完了フラグを設定
-        setIsInitialized(true);
-    }, []);
+        setIsInitialized(true); // 初期化完了フラグを設定
+    }, []); // 初回レンダリング時のみ実行（依存配列が `[]`）
 
     // tasks が更新されるたびに localStorage に保存
     useEffect(() => {
-        if (isInitialized) {
-            localStorage.setItem('tasks', JSON.stringify(tasks));
-        }
-    }, [tasks, isInitialized]);
+        if (!isInitialized) return; // 初期化が終わっていない場合は何もしない
+        // タスク一覧を保存
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+    }, [tasks]);
 
     // 新しいタスクを追加する
     const handleAddTask = useCallback((task: string) => {

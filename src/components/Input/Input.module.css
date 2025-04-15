@@ -53,19 +53,26 @@
   font-size: 16px;
   font-weight: 600;
   color: white;
-  background-color: #4a90e2;
+  background: linear-gradient(135deg, #3B82F6, #9333EA);
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
-.submitButton:hover:not(:disabled) {
-  background-color: #357abd;
+.submitButton:hover {
+  background: linear-gradient(135deg, #2563EB, #7E22CE);
+  transform: scale(1.05);
 }
 
-.submitButton:disabled {
-  background-color: #cccccc;
+.disabledButton {
+  background: #cccccc;
+  color: #aaaaaa;
+  opacity: 0.7;
+}
+
+.disabledButton:hover {
+  background: #cccccc;
   cursor: not-allowed;
 }
 
