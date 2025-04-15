@@ -1,8 +1,8 @@
 import React from 'react';
 import Head from "next/head";
 import Link from "next/link";
-import styles from '@/src/styles/Tasks.module.css';
 import commonStyles from '@/src/styles/common.module.css';
+import styles from '@/src/styles/Tasks.module.css';
 import { Header } from '@/src/components/Header';
 import { useTasks } from '@/src/hooks/useTasks';
 

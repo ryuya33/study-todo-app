@@ -2,10 +2,19 @@
 .todoInput input {
   max-width: 100%;
   box-sizing: border-box;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 .todoInput button {
   background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
   margin-left: 1rem;
 }
 
@@ -16,6 +25,12 @@
 /* タスク一覧ページへのボタン */
 .taskListButton {
   background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .taskListButton:hover {
