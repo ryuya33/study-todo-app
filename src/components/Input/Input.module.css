@@ -1,51 +1,39 @@
 .inputContainer {
-  width: 100%;
   max-width: 500px;
-  /* 入力フィールドの最大幅を設定 */
   margin: 0 auto;
-  /* 中央揃え */
 }
 
 .formContainer {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  /* 要素間の間隔 */
 }
 
 .inputField {
   width: 100%;
   padding: 12px 16px;
-  /* 上下左右のパディング */
   font-size: 16px;
   border: 2px solid #e0e0e0;
-  /* 枠線の色と太さ */
   border-radius: 8px;
-  /* 角を丸く */
   box-sizing: border-box;
   transition: border-color 0.3s ease;
-  /* ホバー時のアニメーション */
 }
 
 .inputField:focus {
   outline: none;
   border-color: #4a90e2;
-  /* フォーカス時の枠線色 */
   box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
-  /* フォーカス時の影 */
 }
 
 .errorInput {
   border-color: #ff4d4f;
-  /* エラー時の枠線色 */
   background-color: #fff1f0;
-  /* エラー時の背景色 */
 }
 
 .errorMessage {
   color: #ff4d4f;
   font-size: 14px;
-  margin: 4px 0 0 0;
+  margin: 0;
 }
 
 .submitButton {

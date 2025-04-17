@@ -8,7 +8,7 @@ export function Header() {
             <h1 className={styles.title}>タスク管理アプリ</h1>
             <nav>
                 <ul className={styles.navList}>
-                    <li><Link href="/">ホーム</Link></li>
+                    <li><Link href="/">登録</Link></li>
                     <li><Link href="/tasks">タスク一覧</Link></li>
                 </ul>
             </nav>

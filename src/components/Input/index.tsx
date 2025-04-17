@@ -8,9 +8,9 @@ type Props = {
 // タスク入力フォームコンポーネント
 export function TodoInput({ handleAddTask }: Props) {
 
-    // ユーザーが入力したテキストを管理する状態
+    // ユーザーが入力したテキストを管理
     const [inputValue, setInputValue] = useState('');
-    // タスク未入力時のエラー表示フラグ
+    // タスク未入力時のエラーメッセージ表示フラグ
     const [isError, setIsError] = useState(false);
 
     // ユーザーが入力を変更したときの処理（`useCallback` でメモ化）
@@ -28,14 +28,21 @@ export function TodoInput({ handleAddTask }: Props) {
 
     // フォーム送信時の処理（タスクを追加）
     const handleSubmit = useCallback((e: React.FormEvent) => {
-        e.preventDefault(); // // 🔹 フォーム送信時のページリロードを防ぐ
+        e.preventDefault(); // フォーム送信時のページリロードを防止
 
+        // 入力が空白だった場合、エラーメッセージを表示
         if (!inputValue.trim()) {
             setIsError(true);
             return;
         }
+
+        // 正常な場合はエラーを解除
         setIsError(false);
+
+        // タスク追加関数（親コンポーネントの関数）を呼び出し
         handleAddTask(inputValue);
+
+        // 入力フィールドをクリア
         setInputValue('');
     }, [inputValue, handleAddTask]);
 
@@ -49,7 +56,11 @@ export function TodoInput({ handleAddTask }: Props) {
                     placeholder="タスクを入力してください（20文字以内）"
                     className={`${styles.inputField} ${isError ? styles.errorInput : ''}`}
                 />
+
+                {/* タスク未入力時のエラーメッセージ表示 */}
                 {isError && <p className={styles.errorMessage}>タスクを入力してください</p>}
+
+                {/* タスク追加ボタン（入力が空なら `disabledButton` のスタイル適用） */}
                 <button
                     type="submit"
                     className={`${styles.submitButton} ${!inputValue.trim() ? styles.disabledButton : ''}`}
