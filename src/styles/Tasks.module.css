@@ -72,6 +72,21 @@
   background-color: #5a6268;
 }
 
+/* タスク登録ページへのボタン */
+.taskRegisterButton {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.taskRegisterButton:hover {
+  background-color: #5a6268;
+}
+
 /* レスポンシブデザイン */
 @media (max-width: 768px) {
   .taskItem {

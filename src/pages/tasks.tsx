@@ -58,7 +58,7 @@ export default function Tasks() {
                 </section>
 
                 <Link href="/">
-                    <button className={`${commonStyles.button} ${styles.taskListButton}`}>タスク登録に戻る</button>
+                    <button className={`${commonStyles.button} ${styles.taskRegisterButton}`}>タスク登録に戻る</button>
                 </Link>
             </main>
         </>

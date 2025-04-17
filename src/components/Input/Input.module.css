@@ -65,7 +65,7 @@
 }
 
 /* レスポンシブ対応 */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .inputContainer {
     max-width: 100%;
     padding: 0 16px;
