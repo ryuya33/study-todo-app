@@ -1,9 +1,9 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import styles from '@/src/components/Input/Input.module.css';
-import { setTimeout } from 'timers/promises';
+import { Task } from '@/src/hooks/useTasks';
 
 type Props = {
-    handleAddTask: (task: string) => void;
+    handleAddTask: (task: Task) => void;
 };
 
 // タスク入力フォームコンポーネント
@@ -15,6 +15,8 @@ export function TodoInput({ handleAddTask }: Props) {
     const [isError, setIsError] = useState(false);
     // タスク登録完了時の成功メッセージ表示フラグ
     const [successMessage, setSuccessMessage] = useState('');
+    // 締切日の管理
+    const [dueDate, setDueDate] = useState('');
 
     // ユーザーが入力を変更したときの処理（`useCallback` でメモ化）
     const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,6 +29,11 @@ export function TodoInput({ handleAddTask }: Props) {
         setInputValue(e.target.value.trim());
         // エラー表示をリセット
         setIsError(false);
+    }, []);
+
+    // 締切変更時の処理（`useCallback` でメモ化）
+    const handleDateChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+        setDueDate(e.target.value);
     }, []);
 
     // フォーム送信時の処理（タスクを追加）
@@ -43,13 +50,18 @@ export function TodoInput({ handleAddTask }: Props) {
         setIsError(false);
 
         // タスク追加関数（親コンポーネントの関数）を呼び出し
-        handleAddTask(inputValue);
+        handleAddTask({
+            text: inputValue,
+            dueDate: dueDate,
+            completed: false //　初期値は「未完了」状態をセット
+        });
 
         // 成功メッセージを表示
         setSuccessMessage('タスクが登録されました！');
 
         // 入力フィールドをクリア
         setInputValue('');
+        setDueDate('');
     }, [inputValue, handleAddTask]);
 
     // 成功メッセージを3秒後にクリアする処理
@@ -63,12 +75,21 @@ export function TodoInput({ handleAddTask }: Props) {
     return (
         <div className={styles.inputContainer}>
             <form className={styles.formContainer} onSubmit={handleSubmit}>
+                {/* タスク入力欄 */}
                 <input
                     type="text"
                     value={inputValue}
                     onChange={handleChange}
                     placeholder="タスクを入力してください（20文字以内）"
                     className={`${styles.inputField} ${isError ? styles.errorInput : ''}`}
+                />
+
+                {/* 期限入力欄 */}
+                <input
+                    type="date"
+                    value={dueDate}
+                    onChange={handleDateChange}
+                    className={styles.dateInput}
                 />
 
                 {/* 成功メッセージを表示（タスク登録成功時） */}
