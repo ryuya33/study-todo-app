@@ -30,6 +30,13 @@
   background-color: #fff1f0;
 }
 
+.successMessage {
+  color: #28a745;
+  font-size: 14px;
+  margin: 4px 0;
+  font-weight: bold;
+}
+
 .errorMessage {
   color: #ff4d4f;
   font-size: 14px;

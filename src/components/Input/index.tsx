@@ -1,5 +1,6 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import styles from '@/src/components/Input/Input.module.css';
+import { setTimeout } from 'timers/promises';
 
 type Props = {
     handleAddTask: (task: string) => void;
@@ -12,6 +13,8 @@ export function TodoInput({ handleAddTask }: Props) {
     const [inputValue, setInputValue] = useState('');
     // タスク未入力時のエラーメッセージ表示フラグ
     const [isError, setIsError] = useState(false);
+    // タスク登録完了時の成功メッセージ表示フラグ
+    const [successMessage, setSuccessMessage] = useState('');
 
     // ユーザーが入力を変更したときの処理（`useCallback` でメモ化）
     const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,9 +45,20 @@ export function TodoInput({ handleAddTask }: Props) {
         // タスク追加関数（親コンポーネントの関数）を呼び出し
         handleAddTask(inputValue);
 
+        // 成功メッセージを表示
+        setSuccessMessage('タスクが登録されました！');
+
         // 入力フィールドをクリア
         setInputValue('');
     }, [inputValue, handleAddTask]);
+
+    // 成功メッセージを3秒後にクリアする処理
+    useEffect(() => {
+        if (successMessage) {
+            const timer: number = window.setTimeout(() => setSuccessMessage(''), 3000);
+            return () => clearTimeout(timer);
+        }
+    }, [successMessage]);
 
     return (
         <div className={styles.inputContainer}>
@@ -57,7 +71,10 @@ export function TodoInput({ handleAddTask }: Props) {
                     className={`${styles.inputField} ${isError ? styles.errorInput : ''}`}
                 />
 
-                {/* タスク未入力時のエラーメッセージ表示 */}
+                {/* 成功メッセージを表示（タスク登録成功時） */}
+                {successMessage && <p className={styles.successMessage}>{successMessage}</p>}
+
+                {/* エラーメッセージ表示（タスク未入力時） */}
                 {isError && <p className={styles.errorMessage}>タスクを入力してください</p>}
 
                 {/* タスク追加ボタン（入力が空なら `disabledButton` のスタイル適用） */}
