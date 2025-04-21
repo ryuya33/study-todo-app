@@ -16,8 +16,8 @@ export default function Home() {
     <>
       {/* HeadコンポーネントでSEO対応 */}
       <Head>
-        <title>タスク登録</title>
-        <meta name="description" content="タスク登録ページです。" />
+        <title>タスク管理アプリ - タスク登録</title>
+        <meta name="description" content="タスク管理アプリで、新しいタスクを追加しましょう！" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
@@ -26,7 +26,7 @@ export default function Home() {
 
       {/* メインコンテンツ */}
       <main className={commonStyles.appContainer}>
-        <section className={commonStyles.section}>
+        <section className={commonStyles.section} aria-label="タスク入力フォーム">
           <h2>タスク登録</h2>
           {/* タスク入力用のフォームコンポーネントを表示 */}
           <TodoInput handleAddTask={handleAddTask} />

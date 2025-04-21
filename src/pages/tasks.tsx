@@ -35,7 +35,7 @@ export default function Tasks() {
                                         onChange={() => handleToggleComplete(index)}
                                     />
                                     <span className={`${styles.taskText} ${task.completed ? styles.taskCompleted : ''}`}>
-                                        {task.text}
+                                        {task.text} - 締切: {task.dueDate}
                                     </span>
                                     <button
                                         className={`${commonStyles.button} ${styles.deleteButton}`}

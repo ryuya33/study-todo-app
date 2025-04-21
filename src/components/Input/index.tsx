@@ -1,9 +1,11 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import styles from '@/src/components/Input/Input.module.css';
-import { Task } from '@/src/hooks/useTasks';
+import { addDays, format } from 'date-fns';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 type Props = {
-    handleAddTask: (task: Task) => void;
+    handleAddTask: (text: string, dueDate: string) => void;
 };
 
 // タスク入力フォームコンポーネント
@@ -16,7 +18,7 @@ export function TodoInput({ handleAddTask }: Props) {
     // タスク登録完了時の成功メッセージ表示フラグ
     const [successMessage, setSuccessMessage] = useState('');
     // 締切日の管理
-    const [dueDate, setDueDate] = useState('');
+    const [dueDate, setDueDate] = useState<Date | null>(null);
 
     // ユーザーが入力を変更したときの処理（`useCallback` でメモ化）
     const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,8 +34,10 @@ export function TodoInput({ handleAddTask }: Props) {
     }, []);
 
     // 締切変更時の処理（`useCallback` でメモ化）
-    const handleDateChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        setDueDate(e.target.value);
+    const handleDateChange = useCallback((date: Date | null) => {
+        if (date) {
+            setDueDate(date);
+        }
     }, []);
 
     // フォーム送信時の処理（タスクを追加）
@@ -41,7 +45,7 @@ export function TodoInput({ handleAddTask }: Props) {
         e.preventDefault(); // フォーム送信時のページリロードを防止
 
         // 入力が空白だった場合、エラーメッセージを表示
-        if (!inputValue.trim()) {
+        if (!inputValue.trim() || !dueDate) {
             setIsError(true);
             return;
         }
@@ -50,19 +54,15 @@ export function TodoInput({ handleAddTask }: Props) {
         setIsError(false);
 
         // タスク追加関数（親コンポーネントの関数）を呼び出し
-        handleAddTask({
-            text: inputValue,
-            dueDate: dueDate,
-            completed: false //　初期値は「未完了」状態をセット
-        });
+        handleAddTask(inputValue, format(dueDate, 'yyyy-MM-dd'));
 
         // 成功メッセージを表示
         setSuccessMessage('タスクが登録されました！');
 
         // 入力フィールドをクリア
         setInputValue('');
-        setDueDate('');
-    }, [inputValue, handleAddTask]);
+        setDueDate(null);
+    }, [inputValue, dueDate, handleAddTask]);
 
     // 成功メッセージを3秒後にクリアする処理
     useEffect(() => {
@@ -85,11 +85,20 @@ export function TodoInput({ handleAddTask }: Props) {
                 />
 
                 {/* 期限入力欄 */}
-                <input
+                {/* <input
                     type="date"
                     value={dueDate}
                     onChange={handleDateChange}
                     className={styles.dateInput}
+                /> */}
+
+                <DatePicker
+                    selected={dueDate}
+                    onChange={handleDateChange}
+                    dateFormat="yyyy-MM-dd"
+                    minDate={new Date()} // 今日以降の選択のみ許可！
+                    maxDate={addDays(new Date(), 30)} // 30日以内の締切のみ設定可能！
+                    placeholderText="締切日を選択"
                 />
 
                 {/* 成功メッセージを表示（タスク登録成功時） */}

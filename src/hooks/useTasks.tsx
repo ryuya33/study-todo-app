@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import { useLocalStorage } from './useLocalStorage';
+import { format, parseISO } from 'date-fns';
 
 // タスク型（タスクのデータ構造を定義）
 export type Task = {
@@ -11,22 +12,28 @@ export type Task = {
 // useTasksフックの戻り値の型を定義（外部コンポーネントが利用するもの）
 export type UseTasksReturnType = {
     tasks: Task[];                                  // 現在のタスク一覧
-    handleAddTask: (task: Task) => void;          // タスク追加関数
+    handleAddTask: (text: string, dueDate: string) => void;          // タスク追加関数
     handleDeleteTask: (index: number) => void;      // タスク削除関数
     handleToggleComplete: (index: number) => void;  // タスク完了状態切り替え関数
     handleDeleteAllTasks: () => void;               // 全タスク削除関数
 };
 
-// タスクの状態管理を行うカスタムフック
+// タスクの状態管理を行うカスタムフック 'useTasks'
 export const useTasks = (): UseTasksReturnType => {
     // useLocalStorageカスタムフックを使って、localStorage と同期した状態管理を行う（初期値は空の配列）
     const [tasks, setTasks] = useLocalStorage<Task[]>('tasks', []);
 
+    // 'dueDate' を 'yyyy-MM-dd' に統一
+    const formatDueDate = (dueDate: string) => {
+        return format(parseISO(dueDate), 'yyyy-MM-dd');
+    }
+
     // 新しいタスクを追加する
-    const handleAddTask = useCallback((task: Task) => {
-        setTasks((prevTasks: Task[]) => [
-            ...prevTasks, task]);
-    }, []);
+    const handleAddTask = useCallback((text: string, dueDate: string) => {
+        const formattedDate = formatDueDate(dueDate);
+        const newTask: Task = { text, dueDate: formattedDate, completed: false };
+        setTasks((prevTasks) => [...prevTasks, newTask]);
+    }, [setTasks]);
 
     // 指定したインデックスのタスクを削除する
     const handleDeleteTask = useCallback((index: number) => {
