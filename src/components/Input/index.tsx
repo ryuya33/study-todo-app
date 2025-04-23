@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import styles from '@/src/components/Input/Input.module.css';
+import styles from '@/src/components/Input/input.module.css';
 import { addDays, format } from 'date-fns';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';

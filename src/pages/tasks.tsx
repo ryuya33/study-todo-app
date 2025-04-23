@@ -1,9 +1,10 @@
 import React from 'react';
-import Head from "next/head";
-import Link from "next/link";
+import Head from 'next/head';
+import Link from 'next/link';
 import commonStyles from '@/src/styles/common.module.css';
-import styles from '@/src/styles/Tasks.module.css';
+import styles from '@/src/styles/tasks.module.css';
 import { Header } from '@/src/components/Header';
+import { List } from '@/src/components/List';
 import { useTasks } from '@/src/hooks/useTasks';
 
 export default function Tasks() {
@@ -25,28 +26,13 @@ export default function Tasks() {
                     {tasks.length === 0 ? (
                         <p className={styles.emptyMessage}>タスクがありません</p>
                     ) : (
-                        <ul className={styles.taskList}>
-                            {tasks.map((task, index) => (
-                                <li key={index} className={styles.taskItem}>
-                                    <input
-                                        type="checkbox"
-                                        className={styles.taskCheckbox}
-                                        checked={task.completed}
-                                        onChange={() => handleToggleComplete(index)}
-                                    />
-                                    <span className={`${styles.taskText} ${task.completed ? styles.taskCompleted : ''}`}>
-                                        {task.text} - 締切: {task.dueDate}
-                                    </span>
-                                    <button
-                                        className={`${commonStyles.button} ${styles.deleteButton}`}
-                                        onClick={() => handleDeleteTask(index)}
-                                    >
-                                        削除
-                                    </button>
-                                </li>
-                            ))}
-                        </ul>
+                        <List
+                            tasks={tasks}
+                            handleDeleteTask={handleDeleteTask}
+                            handleToggleComplete={handleToggleComplete}
+                        />
                     )}
+                    
                     {tasks.length > 0 && (
                         <button
                             className={`${commonStyles.button} ${styles.deleteAllButton}`}

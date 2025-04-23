@@ -1,0 +1,21 @@
+.taskTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.taskTable th,
+.taskTable td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+.taskTable th .headerCell{
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.taskTable tbody .taskRow:hover {
+  background-color: #f1f3f5;
+  transition: all 0.3s ease;
+}
