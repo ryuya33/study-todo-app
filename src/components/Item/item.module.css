@@ -9,6 +9,14 @@
   cursor: pointer;
 }
 
+.editInput {
+  font-size: 16px;
+  padding: 4px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-left: 10px;
+}
+
 .taskText {
   font-size: 16px;
   color: #333;
@@ -25,16 +33,108 @@
   color: #0070f3;
 }
 
-.deleteButton {
-  background-color: #dc3545;
-  color: white;
-  border: none;
+/* アクションボタン用 */
+.editButton,
+.deleteButton,
+.saveButton,
+.cancelButton {
   padding: 5px 10px;
   cursor: pointer;
   border-radius: 4px;
   transition: background-color 0.3s ease;
+  position: relative;
+}
+
+/* 保存ボタン */
+.saveButton {
+  background-color: #28a745;
+  margin-right: 5px;
+}
+
+.saveButton:hover {
+  background-color: #218838;
+}
+
+.saveButton:hover::after {
+  content: "保存";
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 5px 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+/* キャンセルボタン */
+.cancelButton {
+  background-color: #6c757d;
+}
+
+.cancelButton:hover {
+  background-color: #5a6268;
+}
+
+.cancelButton:hover::after {
+  content: "キャンセル";
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 5px 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+/* 編集ボタン */
+.editButton {
+  background-color: #007bff;
+  margin-right: 5px;
+}
+
+.editButton:hover {
+  background-color: #0069d9;
+}
+
+.editButton:hover::after {
+  content: "編集";
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 5px 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+/* 削除ボタン */
+.deleteButton {
+  background-color: #dc3545;
 }
 
 .deleteButton:hover {
   background-color: #c82333;
+}
+
+.deleteButton:hover::after {
+  content: "削除";
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 5px 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  white-space: nowrap;
 }

@@ -10,12 +10,36 @@
   text-align: left;
 }
 
-.taskTable th .headerCell{
+.taskTable th {
   background-color: #f4f4f4;
-  font-weight: bold;
 }
 
 .taskTable tbody .taskRow:hover {
   background-color: #f1f3f5;
   transition: all 0.3s ease;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+
+  .taskTable th,
+  .taskTable td {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .taskTable th:nth-child(1),
+  .taskTable td:nth-child(1) {
+    min-width: 200px;
+  }
+
+  .taskTable th:nth-child(2),
+  .taskTable td:nth-child(2) {
+    min-width: 80px;
+  }
+
+  .taskTable th:nth-child(3),
+  .taskTable td:nth-child(3) {
+    min-width: 120px;
+  }
 }
