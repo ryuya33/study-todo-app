@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, FC } from 'react';
+import React, { useState, useCallback, useEffect, FC, ComponentProps } from 'react';
 import styles from '@/src/components/Input/input.module.css';
 import { addDays, format } from 'date-fns';
 import DatePicker from 'react-datepicker';
@@ -22,7 +22,7 @@ export const TodoInput: FC<Props> = ({ handleAddTask }) => {
     const [dueDate, setDueDate] = useState<Date | null>(null);
 
     // タスク入力を変更した時の処理（`useCallback` でメモ化）
-    const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange: ComponentProps<"input">["onChange"] = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         const trimmedValue = e.target.value.trim();
 
         // 入力が20文字を超えた場合、アラートを表示して処理を中断
@@ -41,7 +41,7 @@ export const TodoInput: FC<Props> = ({ handleAddTask }) => {
     }, []);
 
     // 締切日入力を変更した時の処理（`useCallback` でメモ化）
-    const handleDateChange = useCallback((date: Date | null) => {
+    const handleDateChange: ComponentProps<typeof DatePicker>["onChange"] = useCallback((date: Date | null) => {
         setDueDate(date);
 
         // 締切日が選択されたら、エラー表示を解除
@@ -51,7 +51,7 @@ export const TodoInput: FC<Props> = ({ handleAddTask }) => {
     }, []);
 
     // フォーム送信時の処理（タスクを追加）
-    const handleSubmit = useCallback((e: React.FormEvent) => {
+    const handleSubmit: ComponentProps<"form">["onSubmit"] = useCallback((e: React.FormEvent<HTMLFormElement>) => {
         // フォーム送信時のページリロードを防止
         e.preventDefault();
 
@@ -98,6 +98,7 @@ export const TodoInput: FC<Props> = ({ handleAddTask }) => {
                 {/* タスク入力欄 */}
                 <input
                     type="text"
+                    name="task"
                     value={inputValue}
                     onChange={handleChange}
                     placeholder="タスクを入力してください（20文字以内）"
@@ -109,6 +110,7 @@ export const TodoInput: FC<Props> = ({ handleAddTask }) => {
 
                 {/* 締切日入力欄 */}
                 <DatePicker
+                    name="dueDate"
                     selected={dueDate}
                     onChange={handleDateChange}
                     dateFormat="yyyy-MM-dd"

@@ -29,24 +29,26 @@ export const Item: FC<TaskItemProps> = ({ task, index, handleDeleteTask, handleT
         <tr className={styles.taskRow}>
             {/* タスク名（チェックボックス付き） */}
             <td>
-                <input
-                    type="checkbox"
-                    checked={task.completed}
-                    onChange={() => handleToggleComplete(index)}
-                    className={styles.checkbox}
-                />
-                {isEditing ? (
+                <label>
                     <input
-                        type="text"
-                        value={editedText}
-                        onChange={(e) => setEditedText(e.target.value)}
-                        className={styles.editInput}
+                        type="checkbox"
+                        checked={task.completed}
+                        onChange={() => handleToggleComplete(index)}
+                        className={styles.checkbox}
                     />
-                ) : (
-                    <span className={`${styles.taskText} ${task.completed ? styles.taskCompleted : ''}`}>
-                        {task.text}
-                    </span>
-                )}
+                    {isEditing ? (
+                        <input
+                            type="text"
+                            value={editedText}
+                            onChange={(e) => setEditedText(e.target.value)}
+                            className={styles.editInput}
+                        />
+                    ) : (
+                        <span className={`${styles.taskText} ${task.completed ? styles.taskCompleted : ''}`}>
+                            {task.text}
+                        </span>
+                    )}
+                </label>
             </td>
 
             {/* 締切日 */}
