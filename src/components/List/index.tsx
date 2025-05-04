@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Item } from '@/src/components/Item/index';
 import styles from '@/src/components/List/list.module.css';
 import { Task } from '@/src/hooks/useTasks';
@@ -12,12 +12,7 @@ type TaskListProps = {
 }
 
 // タスク一覧コンポーネント
-export function List({
-    tasks,
-    handleDeleteTask,
-    handleToggleComplete,
-    handleEditTask
-}: TaskListProps) {
+export const List: FC<TaskListProps> = ({ tasks, handleDeleteTask, handleToggleComplete, handleEditTask }) => {
     return (
         <table className={styles.taskTable}>
             <thead>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import commonStyles from '@/src/styles/common.module.css';
 import styles from '@/src/components/Item/item.module.css';
 import { Task } from '@/src/hooks/useTasks';
@@ -13,13 +13,7 @@ type TaskItemProps = {
 };
 
 // タスクアイテムコンポーネント
-export function Item({
-    task,
-    index,
-    handleDeleteTask,
-    handleToggleComplete,
-    handleEditTask
-}: TaskItemProps) {
+export const Item: FC<TaskItemProps> = ({ task, index, handleDeleteTask, handleToggleComplete, handleEditTask }) => {
 
     // 編集モードの状態管理
     const [isEditing, setIsEditing] = useState(false);

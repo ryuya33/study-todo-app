@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { FC } from 'react';
 import Link from 'next/link';
 import styles from '@/src/components/Header/Header.module.css';
 
-export function Header() {
+export const Header: FC = () => {
     return (
         <header className={styles.header}>
             <h1 className={styles.title}>タスク管理アプリ</h1>

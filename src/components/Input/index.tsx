@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, FC } from 'react';
 import styles from '@/src/components/Input/input.module.css';
 import { addDays, format } from 'date-fns';
 import DatePicker from 'react-datepicker';
@@ -9,7 +9,7 @@ type Props = {
 };
 
 // タスク入力フォームコンポーネント
-export function TodoInput({ handleAddTask }: Props) {
+export const TodoInput: FC<Props> = ({ handleAddTask }) => {
 
     // ユーザーが入力したテキストを管理
     const [inputValue, setInputValue] = useState('');
